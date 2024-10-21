@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">עמוד הבית</a></li>
+            <li><a href="/about">אודות</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+        <br>
+    </main>
+    <div id="accessibility-icon" onclick="toggleAccessibilityMenu()">
+        <i class="fas fa-wheelchair"></i>
+    </div>
+
+    <div id="accessibility-menu">
+        <button onclick="increaseFontSize()">הגדל טקסט</button>
+        <button onclick="decreaseFontSize()">הקטן טקסט</button>
+        <button onclick="toggleContrast()">ניגודיות גבוהה</button>
+    </div>
+    <footer>
+        <p>Contact Us on
+             <a href="https://www.instagram.com/car.style4u/" target="_blank"><i class="fab fa-instagram"></i>Instagram</a> ,
+            <a href="#" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        </p>
+        <p>
+            Or Call Us 0502281824
+        </p>
+
+    </footer>
+    <script>
+        function toggleAccessibilityMenu() {
+            var menu = document.getElementById('accessibility-menu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+        function increaseFontSize() {
+            document.body.style.fontSize = (parseInt(window.getComputedStyle(document.body).fontSize) + 2) + 'px';
+        }
+
+        function decreaseFontSize() {
+            document.body.style.fontSize = (parseInt(window.getComputedStyle(document.body).fontSize) - 2) + 'px';
+        }
+
+        function toggleContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+    </script>
+
+</body>
+</html>

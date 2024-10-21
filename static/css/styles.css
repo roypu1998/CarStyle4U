@@ -1,0 +1,268 @@
+/* כלליים */
+body {
+  font-family: 'Poppins', sans-serif; /* פונט מודרני ונקי */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* ממרכז את כל התוכן */
+  background-color: #ffffff; /* רקע בהיר */
+  color: #2c3e50; /* טקסט כהה */
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* contrast */
+.high-contrast {
+    background-color: black;
+    color: yellow;
+}
+
+.high-contrast a {
+    color: cyan;
+}
+
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6{
+    color: yellow; /* הכותרות יהיו בצבע בהיר */
+}
+
+.high-contrast p {
+    color: white; /* הטקסטים בפסקאות יהיו בצבע לבן */
+}
+
+.high-contrast .car-description {
+    background-color: black; /* רקע כהה */
+    color: yellow; /* טקסט בצבע בהיר */
+    border-color: yellow; /* מסגרת בצבע מתאים */
+}
+
+.high-contrast .car-description p {
+    color: yellow; /* צבע טקסט בפסקאות של התיאור */
+}
+
+/* עיצוב הכותרת הראשית */
+h1 {
+    font-family: 'Poppins', sans-serif; /* פונט מודרני */
+    font-size: 42px; /* גודל כותרת */
+    color: #222f3e; /* צבע כהה ומעודן */
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase; /* אותיות גדולות */
+    letter-spacing: 3px; /* ריווח בין אותיות */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* הצללה רכה */
+    animation: fadeIn 1.2s ease-in-out; /* אנימציה של כניסה */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* עיצוב הניווט */
+nav {
+  background-color: #222f3e; /* צבע רקע כהה תואם לפוטר */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל רך מתחת לניווט */
+  border-radius: 0 0 12px 12px; /* פינות מעוגלות בחלק התחתון */
+  position: sticky; /* מקבע את הניווט למעלה */
+  top: 0;
+  z-index: 1000; /* מוודא שהניווט נשאר מעל תוכן הדף */
+}
+
+nav ul {
+  list-style-type: none; /* מסיר את העיגולים של הרשימה */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* מרכז את הפריטים במרכז */
+  gap: 20px; /* רווח בין הפריטים */
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px; /* גודל טקסט */
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* מעבר חלק */
+  border-radius: 8px; /* פינות מעוגלות לקישורים */
+}
+
+nav ul li a:hover {
+  background-color: #1e90ff; /* צבע רקע על ריחוף */
+  color: #fff;
+}
+
+/* שינוי הצבע של הלינקים עבור העמוד הפעיל */
+nav ul li a.active {
+  background-color: #1e90ff; /* מדגיש את הקישור של העמוד הפעיל */
+  color: white;
+}
+
+/* עיצוב גריד לרכבים */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* סידור דינמי של הרכבים בגריד */
+  gap: 25px;
+  padding: 20px;
+  justify-items: center; /* ממרכז את הפריטים */
+}
+
+.car-item {
+  background-color: #fff;
+  border-radius: 12px; /* פינות מעוגלות */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* צל רך */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* אפקט מעבר */
+}
+
+.car-item:hover {
+  transform: translateY(-10px); /* אפקט הרמה */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* צל יותר עמוק */
+}
+
+.car-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* התאמת תמונה לגודל */
+}
+
+.car-item p {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2f3542;
+}
+
+/* כפתור הסינון */
+form select, form button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1e90ff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover, form select:hover {
+  background-color: #3742fa; /* שינוי צבע על ריחוף */
+}
+
+/* עיצוב התיאור של הרכב */
+.car-description {
+    max-width: 600px;
+    margin: 20px auto;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* צל */
+    text-align: center;
+}
+
+.car-description.long {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+/* פוטר */
+footer {
+  background-color: #222f3e;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 30px;
+}
+
+footer p a {
+  color: #fff;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+footer p a:hover {
+  color: #1e90ff; /* צבע משתנה על ריחוף */
+}
+
+footer i {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+footer p:last-child {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/*accessibility*/
+
+#accessibility-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1e90ff;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#accessibility-icon i {
+    font-size: 24px;
+}
+
+#accessibility-menu {
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    text-align: center;
+}
+
+#accessibility-menu button {
+    display: block;
+    margin: 10px 0;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#accessibility-menu button:hover {
+    background-color: #155e75;
+}

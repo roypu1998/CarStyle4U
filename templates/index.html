@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>CarStyle4U</h1>  <!-- כותרת דף הבית -->
+
+<br>
+<form method="GET" action="/">
+    <select id="model" name="model">
+        <option value="הכל">הכל</option>
+        {% for opt in options %}
+            <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+    </select>
+    <label for="model">:בחירת דגם</label>
+    <button tabindex="0">סינון</button>
+</form>
+<br>
+<div class="car-grid">
+    {% for car in cars %}
+        <div class="car-item">
+            <a href="/car/{{ car.id }}">
+                <img src="{{ url_for('static', filename='images/' ~ car.images[0]) }}" alt="תמונה של {{ car.name }}">
+                <p>{{ car.name }} - ₪{{ car.price }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
