@@ -1,7 +1,7 @@
 import requests
 from dotenv import load_dotenv
-from static.cars_list import cars
-from static.utils import create_dict, save_to_file
+from static.cars_list import download_pinned_media, load_catalog_from_json
+from static.utils import create_dict, send_json_to_group
 import os
 import telebot
 import threading
@@ -13,9 +13,19 @@ load_dotenv()
 bot_token = os.getenv('BOT_TOKEN')
 bot_id = os.getenv("BOT_ID")
 domain = os.getenv("DOMAIN")
+catalog_chat_id = os.getenv("CATALOG_CHAT_ID")
 
 add_car_flag = 0
 bot = telebot.TeleBot(token=bot_id+ ':' + bot_token)
+
+# Download media if desired
+download_result = download_pinned_media(bot, bot_token, catalog_chat_id)
+print(f"Download status: {download_result['status']}")
+print(f"Download message: {download_result['message']}")
+if download_result['status'] == 'success':
+    print(f"Saved to: {download_result['file_path']}")
+    cars = load_catalog_from_json(json_file_path=download_result['file_path'])
+
 
 # set webhook
 url = f"https://api.telegram.org/bot{bot_id}:{bot_token}/setWebhook?url=https://{domain}/webhook/telegram/{bot_id}:{bot_token}"
@@ -23,14 +33,10 @@ url = f"https://api.telegram.org/bot{bot_id}:{bot_token}/setWebhook?url=https://
 save_dir = 'static/images'
 
 response = requests.get(url)
-print(url)  # Check the response
-print(response.json())  # Check the response
-
 
 @bot.message_handler(commands=['start', 'hello'])
 def send_welcome(message):
     bot.reply_to(message, "Howdy, how are you doing?")
-
 
 
 @bot.message_handler(content_types=['photo'])
@@ -68,8 +74,9 @@ def add_car(message):
     try:
         string_data = message.text[1:len(message.text)-1]
         cars.append(create_dict(string_data.replace('\n', '').replace('    ','').replace("'","").split('#')))
-        save_to_file(cars_list=cars)
+        send_json_to_group(bot=bot, cars_list=cars, json_file_path='cars_data.json', chat_id=catalog_chat_id)
         bot.reply_to(message, "Car added")
+        bot.send_message(message.chat.id, "Cars file updated")
     except Exception as error:
         bot.reply_to(message, f"Oops! Something Wrong:\n{error}")
 
@@ -83,7 +90,9 @@ def remove_car(message):
     if remove_var != 9999:
         bot.reply_to(message, f'{cars[remove_var]["id"]} found')
         cars.pop(remove_var)
+        send_json_to_group(bot=bot, cars_list=cars, json_file_path='cars_data.json', chat_id=catalog_chat_id)
         bot.reply_to(message, f'Car removed')
+        bot.send_message(message.chat.id, "Cars file updated")
     else:
         bot.reply_to(message, f'No Car for id: {message.text}')
 
