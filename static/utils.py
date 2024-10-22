@@ -5,6 +5,20 @@ def save_to_file(cars_list, filename='cars_data.json'):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(cars_list, f, ensure_ascii=False, indent=4)
 
+
+# פונקציה לשליחת קובץ JSON לקבוצת טלגרם
+def send_json_to_group(bot, cars_list ,json_file_path, chat_id):
+    with open(json_file_path, 'w', encoding='utf-8') as f:
+        json.dump(cars_list, f, ensure_ascii=False, indent=4)
+    with open(json_file_path, 'rb') as json_file:
+        sent_message = bot.send_document(chat_id, json_file)
+        # Pin the message
+        bot.pin_chat_message(chat_id, sent_message.message_id,
+            disable_notification=True  # Don't notify members about pinning
+        )
+
+
+
 # Create a dictionary's list of cars data
 def create_dict(list_details: list) -> dict:
     dict_var = {}
